@@ -1,7 +1,9 @@
 FROM node as builder
 
-COPY github_key .
-RUN chmod 600 github_key && \
+ARG SSH_PRIVATE_KEY
+
+RUN echo "${SSH_PRIVATE_KEY}" > /github_key
+    chmod 600 github_key && \
     eval $(ssh-agent) && \
     ssh-add github_key && \
     ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts && \
