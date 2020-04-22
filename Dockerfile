@@ -2,7 +2,7 @@ FROM node as builder
 
 ARG SSH_PRIVATE_KEY
 
-RUN echo "${SSH_PRIVATE_KEY}" > /github_key
+RUN echo "${SSH_PRIVATE_KEY}" > /github_key && \
     chmod 600 github_key && \
     eval $(ssh-agent) && \
     ssh-add github_key && \
